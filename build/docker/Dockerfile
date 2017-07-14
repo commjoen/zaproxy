@@ -34,7 +34,11 @@ RUN pip install zapcli
 RUN pip install python-owasp-zap-v2.4
 
 RUN mkdir -p /zap
+RUN mkdir -p /zap/?
+RUN mkdir -p /zap/?/.ZAP
 RUN chmod -R 777 /zap
+RUN chmod -R 777 /zap/?
+RUN chmod -R 777 /zap/?/.ZAP
 WORKDIR /zap
 
 #Change to the zap user so things get done as the right person (apart from copy)
