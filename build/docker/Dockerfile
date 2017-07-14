@@ -38,9 +38,6 @@ WORKDIR /zap
 
 #Change to the zap user so things get done as the right person (apart from copy)
 
-RUN mkdir /home/zap/.vnc
-
-
 
 # Download and expand the latest stable release 
 RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml | xmlstarlet sel -t -v //url |grep -i Linux | wget --content-disposition -i - -O - | tar zxv && \
