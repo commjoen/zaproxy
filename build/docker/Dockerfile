@@ -33,15 +33,10 @@ RUN pip install zapcli
 # Install latest dev version of the python API
 RUN pip install python-owasp-zap-v2.4
 
-RUN useradd -d /home/zap -m -s /bin/bash zap 
-RUN echo zap:zap | chpasswd
 RUN mkdir /zap 
 WORKDIR /zap
-RUN chown zap /zap && \
-	chgrp zap /zap
 
 #Change to the zap user so things get done as the right person (apart from copy)
-USER zap
 
 RUN mkdir /home/zap/.vnc
 
@@ -74,16 +69,6 @@ COPY policies /home/zap/.ZAP/policies/
 COPY .xinitrc /home/zap/
 
 
-#Copy doesn't respect USER directives so we need to chown and to do that we need to be root
-USER root
 
-RUN chown zap:zap /zap/zap-x.sh && \
-	chown zap:zap /zap/zap-baseline.py && \
-	chown zap:zap /zap/zap-webswing.sh && \
-	chown zap:zap /zap/webswing-2.3/webswing.config && \
-	chown zap:zap -R /home/zap/.ZAP/ && \
-	chown zap:zap /home/zap/.xinitrc && \
-	chmod a+x /home/zap/.xinitrc
 #Change back to zap at the end
-USER zap
 HEALTHCHECK --retries=5 --interval=5s CMD zap-cli status
