@@ -68,7 +68,7 @@ ENV HOME /home/zap/
 
 COPY zap-x.sh /zap/ 
 COPY zap-* /zap/ 
-COPY zap_* /zap/ 
+# COPY zap_* /zap/ 
 COPY webswing.config /zap/webswing-2.3/ 
 COPY policies /home/zap/.ZAP/policies/
 COPY .xinitrc /home/zap/
