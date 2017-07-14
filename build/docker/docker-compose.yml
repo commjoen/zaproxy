@@ -1,0 +1,7 @@
+version: "2"
+services:
+  zaproxy:
+    build: .
+    command: zap.sh -daemon -port 8090 -host 0.0.0.0
+    ports:
+      - "8090:8090"
