@@ -33,13 +33,14 @@ RUN pip install zapcli
 # Install latest dev version of the python API
 RUN pip install python-owasp-zap-v2.4
 
-RUN mkdir /zap -p 
+RUN mkdir -p /zap
+RUN chmod -R 777 /zap
 WORKDIR /zap
 
 #Change to the zap user so things get done as the right person (apart from copy)
 
 
-# Download and expand the latest stable release 
+# Download and expand the latest stable release
 RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersions-dev.xml | xmlstarlet sel -t -v //url |grep -i Linux | wget --content-disposition -i - -O - | tar zxv && \
 	cp -R ZAP*/* . &&  \
 	rm -R ZAP* && \
@@ -58,10 +59,10 @@ ENV ZAP_PORT 8080
 ENV HOME /home/zap/
 
 
-COPY zap-x.sh /zap/ 
-COPY zap-* /zap/ 
-# COPY zap_* /zap/ 
-COPY webswing.config /zap/webswing-2.3/ 
+COPY zap-x.sh /zap/
+COPY zap-* /zap/
+# COPY zap_* /zap/
+COPY webswing.config /zap/webswing-2.3/
 COPY policies /home/zap/.ZAP/policies/
 COPY .xinitrc /home/zap/
 
